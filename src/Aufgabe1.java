@@ -55,12 +55,12 @@ public class Aufgabe1 {
 
     }
 
-    public void groupTotalHouse(List<Marvel> list) {
+    public void groupTotalKonfuntationen(List<Marvel> list) {
 
-        Map<Haus, Long> countMap = list.stream()
-                .collect(Collectors.groupingBy(Eregeigniss::getHaus, Collectors.counting()));
+        Map<Konfrontationstyp, Long> countMap = list.stream()
+                .collect(Collectors.groupingBy(Marvel::getTyp, Collectors.counting()));
 
-        List<Map.Entry<Haus, Long>> sorted = new ArrayList<>(countMap.entrySet());
+        List<Map.Entry<Konfrontationstyp, Long>> sorted = new ArrayList<>(countMap.entrySet());
 
         sorted.sort((entry1, entry2) -> {
             int countCompare = entry2.getValue().compareTo(entry1.getValue()); // Absteigende Reihenfolge der Fallanzahl
@@ -72,9 +72,9 @@ public class Aufgabe1 {
         });
 
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("ereignis.txt"))) {
-            for (Map.Entry<Haus, Long> entry : sorted) {
-                writer.write(entry.getKey() + "#" + entry.getValue() + "\n");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("bericht_konfrontationen.txt"))) {
+            for (Map.Entry<Konfrontationstyp, Long> entry : sorted) {
+                writer.write(entry.getKey() + "&" + entry.getValue() + "\n");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -18,6 +18,8 @@ public class Main {
         System.out.println("Galaktischen:");
         aufgabe1.sortGalaktish(list);
 
+        aufgabe1.groupTotalKonfuntationen(list);
+
 
 
     }
