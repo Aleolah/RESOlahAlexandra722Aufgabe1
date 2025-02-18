@@ -54,33 +54,33 @@ public class Aufgabe1 {
         list.stream().filter(entry -> entry.getTyp() == Konfrontationstyp.Galaktisch).sorted((p1, p2) -> p2.getDatum().compareTo(p1.getDatum())).forEach(entry -> System.out.println(entry.getDatum() + ":" + entry.getHeld() + "vs." + entry.getAntagonist() + "-" + entry.getOrt()));
 
     }
-//
-//    public void groupTotalHouse(List<Eregeigniss> list) {
-//
-//        Map<Haus, Long> countMap = list.stream()
-//                .collect(Collectors.groupingBy(Eregeigniss::getHaus, Collectors.counting()));
-//
-//        List<Map.Entry<Haus, Long>> sorted = new ArrayList<>(countMap.entrySet());
-//
-//        sorted.sort((entry1, entry2) -> {
-//            int countCompare = entry2.getValue().compareTo(entry1.getValue()); // Absteigende Reihenfolge der Fallanzahl
-//            if (countCompare != 0) {
-//                return countCompare;
-//            } else {
-//                return entry1.getKey().compareTo(entry2.getKey());
-//            }
-//        });
-//
-//
-//        try (BufferedWriter writer = new BufferedWriter(new FileWriter("ereignis.txt"))) {
-//            for (Map.Entry<Haus, Long> entry : sorted) {
-//                writer.write(entry.getKey() + "#" + entry.getValue() + "\n");
-//            }
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-//
+
+    public void groupTotalHouse(List<Marvel> list) {
+
+        Map<Haus, Long> countMap = list.stream()
+                .collect(Collectors.groupingBy(Eregeigniss::getHaus, Collectors.counting()));
+
+        List<Map.Entry<Haus, Long>> sorted = new ArrayList<>(countMap.entrySet());
+
+        sorted.sort((entry1, entry2) -> {
+            int countCompare = entry2.getValue().compareTo(entry1.getValue()); // Absteigende Reihenfolge der Fallanzahl
+            if (countCompare != 0) {
+                return countCompare;
+            } else {
+                return entry1.getKey().compareTo(entry2.getKey());
+            }
+        });
+
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("ereignis.txt"))) {
+            for (Map.Entry<Haus, Long> entry : sorted) {
+                writer.write(entry.getKey() + "#" + entry.getValue() + "\n");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 
 }
