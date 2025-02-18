@@ -51,7 +51,7 @@ public class Aufgabe1 {
     }
 
     public void sortGalaktish(List<Marvel> list) {
-        list.stream().filter(entry -> entry.getTyp() == Konfrontationstyp.Galaktisch).sorted((p1, p2) -> p2.getDatum().compareTo(p1.getDatum())).forEach(entry -> System.out.println(entry.getDatum() + ":" + entry.getHeld() + "vs." + entry.getAntagonist() + "-" + entry.getOrt()));
+        list.stream().filter(entry -> entry.getTyp() == Konfrontationstyp.Galaktisch).sorted((p1, p2) -> p2.getDatum().compareTo(p1.getDatum())).forEach(entry -> System.out.println(entry.getDatum() + " : " + entry.getHeld() + " vs. " + entry.getAntagonist() + " - " + entry.getOrt()));
 
     }
 
@@ -74,7 +74,7 @@ public class Aufgabe1 {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("bericht_konfrontationen.txt"))) {
             for (Map.Entry<Konfrontationstyp, Long> entry : sorted) {
-                writer.write(entry.getKey() + "&" + entry.getValue() + "\n");
+                writer.write(entry.getKey() + "&" + entry.getValue() +"\n");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
