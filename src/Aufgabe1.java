@@ -1,10 +1,10 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Aufgabe1 {
     public List<Marvel> readFileTsv() throws IOException {
@@ -33,7 +33,7 @@ public class Aufgabe1 {
             String typ = values[3].replace("\"", "");
             String ort =values[4].replace("\"", "");
             LocalDate time = LocalDate.parse(values[5].replace("\"", ""));
-            double global = Double.parseDouble(values[5].replace("\"", ""));
+            double global = Double.parseDouble(values[6].replace("\"", ""));
 
             all.add(new Marvel(id, held,antagonist,Konfrontationstyp.valueOf(typ), ort,time ,  global));
 
@@ -44,5 +44,43 @@ public class Aufgabe1 {
 
 
     }
+
+    public void filterByGlobal(double global, List<Marvel> list) {
+        list.stream().filter(entry -> entry.getGlobalerEinfluss() > global).map(Marvel::getHeld).distinct().forEach(System.out::println);
+
+    }
+
+    public void sortGalaktish(List<Marvel> list) {
+        list.stream().filter(entry -> entry.getTyp() == Konfrontationstyp.Galaktisch).sorted((p1, p2) -> p2.getDatum().compareTo(p1.getDatum())).forEach(entry -> System.out.println(entry.getDatum() + ":" + entry.getHeld() + "vs." + entry.getAntagonist() + "-" + entry.getOrt()));
+
+    }
+//
+//    public void groupTotalHouse(List<Eregeigniss> list) {
+//
+//        Map<Haus, Long> countMap = list.stream()
+//                .collect(Collectors.groupingBy(Eregeigniss::getHaus, Collectors.counting()));
+//
+//        List<Map.Entry<Haus, Long>> sorted = new ArrayList<>(countMap.entrySet());
+//
+//        sorted.sort((entry1, entry2) -> {
+//            int countCompare = entry2.getValue().compareTo(entry1.getValue()); // Absteigende Reihenfolge der Fallanzahl
+//            if (countCompare != 0) {
+//                return countCompare;
+//            } else {
+//                return entry1.getKey().compareTo(entry2.getKey());
+//            }
+//        });
+//
+//
+//        try (BufferedWriter writer = new BufferedWriter(new FileWriter("ereignis.txt"))) {
+//            for (Map.Entry<Haus, Long> entry : sorted) {
+//                writer.write(entry.getKey() + "#" + entry.getValue() + "\n");
+//            }
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+
 
 }
